@@ -1,5 +1,4 @@
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace MadiffApi.Repositories;
 public class CardService : ICardService

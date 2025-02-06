@@ -8,38 +8,23 @@ global using MadiffApi.Requests;
 global using Services;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
-builder.Services.AddControllers(options =>
-{
-});
-
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Madiff API", Version = "v1" });
 });
-
 builder.Services.AddScoped<ICardService, CardService>();
 builder.Services.AddScoped<ICardActionService, CardActionService>();
 builder.Services.AddScoped<IAvailableActionsProvider, AvailableActionsProvider>();
 
 var app = builder.Build();
-
 app.UseMiddleware<ExceptionHandlingMiddleware>();
-
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Madiff API V1"));
 }
-
 app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

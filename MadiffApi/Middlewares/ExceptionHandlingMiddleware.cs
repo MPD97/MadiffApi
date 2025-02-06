@@ -39,23 +39,24 @@ namespace MadiffApi.Middlewares
             var response = context.Response;
             response.ContentType = "application/json";
 
-            var errorResponse = new ErrorResponse
-            {
-                TraceId = context.TraceIdentifier
-            };
+            ErrorResponse errorResponse;
 
             switch (exception)
             {
                 case ApiException apiException:
                     response.StatusCode = apiException.StatusCode;
-                    errorResponse.Message = apiException.Message;
+
+                    errorResponse = new ErrorResponse(apiException.Message, context.TraceIdentifier);
+
                     break;
 
                 default:
                     response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                    errorResponse.Message = _environment.IsDevelopment()
+
+                    errorResponse = new ErrorResponse(_environment.IsDevelopment()
                         ? exception.Message
-                        : "An internal server error occurred";
+                        : "An internal server error occurred", context.TraceIdentifier);
+                   
                     break;
             }
 

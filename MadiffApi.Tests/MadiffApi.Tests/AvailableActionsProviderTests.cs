@@ -60,7 +60,7 @@ namespace MadiffApi.Tests
 
             _cardServiceMock
                 .Setup(x => x.GetCardDetails(userId, cardNumber))
-                .ReturnsAsync((CardDetails)null);
+                .ReturnsAsync((CardDetails) null);
 
             // Act & Assert
             await Assert.ThrowsAsync<NotFoundException>(() =>
