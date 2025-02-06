@@ -1,0 +1,6 @@
+@MadiffApi_HostAddress = http://localhost:5210
+
+GET {{MadiffApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
