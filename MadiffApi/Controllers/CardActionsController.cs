@@ -12,7 +12,7 @@ namespace MadiffApi.Controllers
             _availableActionsProvider = availableActionsProvider;
         }
 
-        [HttpPost("available-actions")]
+        [HttpPost("AvailableActions")]
         [ProducesResponseType(typeof(CardActionResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
